@@ -151,6 +151,7 @@ CLASS_COLORS = {
     CLASS_LABELS[i]: PALETTE[i % len(PALETTE)] for i in range(NUM_CLASSES)
 }
 
+
 # ===================== PREPROCESSING FUNCTIONS =====================
 def preprocess_for_classifier(img: Image.Image):
     """
