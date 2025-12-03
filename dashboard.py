@@ -134,12 +134,21 @@ def load_detector_model():
 classifier_model = load_classifier_model()
 detector_model = load_detector_model()
 
+# ===================== DETECTION LABELS (YOLO) =====================
+DETECTION_LABELS = {
+    0: "Pensil",
+    1: "Penghapus",
+    2: "Rautan",
+    3: "Penggaris"
+}
+
 # Ambil info input dan output model klasifikasi
 CLASS_INPUT_SHAPE = classifier_model.input_shape  # (None, H, W, C)
 _, CLASS_H, CLASS_W, CLASS_C = CLASS_INPUT_SHAPE
 NUM_CLASSES = classifier_model.output_shape[-1]
 
-# Karena label asli tidak diketahui, buat label generik
+
+# Karena beberapa label asli tidak diketahui, buat label generik
 CLASS_LABELS = [f"Class {i}" for i in range(NUM_CLASSES)]
 
 # Palet warna untuk card/probabilities
@@ -203,8 +212,9 @@ def detect_objects_with_yolo(pil_image: Image.Image, model, conf_threshold: floa
         detections.append({
             "box": boxes[i],                 # [x1, y1, x2, y2]
             "score": float(conf[i]),         # confidence
-            "label": names.get(int(cls[i]), f"class_{cls[i]}")
+            "label": DETECTION_LABELS.get(int(cls[i]), f"class_{cls[i]}")
         })
+
 
     # Gambar bounding box di atas gambar
     img_draw = pil_image.copy()
