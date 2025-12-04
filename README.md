@@ -19,4 +19,6 @@ pip install -r requirements.txt
 python -m streamlit run dashboard.py 
 ```
 
+### Link Dashboard Streamlit
+[Klik untuk membuka Dashboard Streamlit](https://uts-praktikumbigdata-laura.streamlit.app/)
 
